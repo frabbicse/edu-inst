@@ -1,0 +1,219 @@
+﻿@model UserSegment.Models.RegisterModel
+
+@{
+    ViewData["Title"] = "User Registration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="register-container">
+    <div class="register-header">
+        <h1>🎓 Create Account</h1>
+        <p>Join EduManage and start managing your institution efficiently</p>
+    </div>
+
+    <div class="progress-steps">
+        <div class="step active">
+            <div class="step-number">1</div>
+            <span class="step-label">Personal Info</span>
+        </div>
+        <div class="step">
+            <div class="step-number">2</div>
+            <span class="step-label">Account Details</span>
+        </div>
+        <div class="step">
+            <div class="step-number">3</div>
+            <span class="step-label">Verification</span>
+        </div>
+    </div>
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="validation-summary">
+            <div asp-validation-summary="All"></div>
+        </div>
+    }
+
+    <form method="post" asp-page-handler="Register" enctype="multipart/form-data">
+        <div class="form-grid">
+            <div class="form-group">
+                <label for="firstName">First Name<span class="required">*</span></label>
+                <div class="input-wrapper">
+                    <span class="input-icon">👤</span>
+                    <input type="text" class="form-control" id="firstName" asp-for="FirstName" placeholder="Enter first name" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Last Name<span class="required">*</span></label>
+                <div class="input-wrapper">
+                    <span class="input-icon">👤</span>
+                    <input type="text" class="form-control" id="lastName" asp-for="LastName" placeholder="Enter last name" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address<span class="required">*</span></label>
+                <div class="input-wrapper">
+                    <span class="input-icon">📧</span>
+                    <input type="email" class="form-control" id="email" asp-for="Email" placeholder="your.email@example.com" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number<span class="required">*</span></label>
+                <div class="input-wrapper">
+                    <span class="input-icon">📱</span>
+                    <input type="tel" class="form-control" id="phone" asp-for="PhoneNumber" placeholder="+1 (555) 123-4567" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="dateOfBirth">Date of Birth<span class="required">*</span></label>
+                <div class="input-wrapper">
+                    <span class="input-icon">📅</span>
+                    <input type="date" class="form-control" id="dateOfBirth" asp-for="DateOfBirth" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Gender<span class="required">*</span></label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="Gender" value="Male" asp-for="Gender" required>
+                        <span>Male</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="Gender" value="Female" asp-for="Gender">
+                        <span>Female</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="Gender" value="Other" asp-for="Gender">
+                        <span>Other</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group full-width">
+                <label for="address">Address<span class="required">*</span></label>
+                <div class="input-wrapper">
+                    <span class="input-icon">🏠</span>
+                    <input type="text" class="form-control" id="address" asp-for="Address" placeholder="Enter your full address" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="city">City<span class="required">*</span></label>
+                <div class="input-wrapper">
+                    <span class="input-icon">🏙️</span>
+                    <input type="text" class="form-control" id="city" asp-for="City" placeholder="Enter city" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="zipCode">Zip Code<span class="required">*</span></label>
+                <div class="input-wrapper">
+                    <span class="input-icon">📮</span>
+                    <input type="text" class="form-control" id="zipCode" asp-for="ZipCode" placeholder="Enter zip code" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="username">Username<span class="required">*</span></label>
+                <div class="input-wrapper">
+                    <span class="input-icon">👤</span>
+                    <input type="text" class="form-control" id="username" asp-for="Username" placeholder="Choose a username" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="userRole">Role<span class="required">*</span></label>
+                <div class="input-wrapper">
+                    <span class="input-icon">🎭</span>
+                    <select class="form-control" id="userRole" asp-for="UserRole" required>
+                        <option value="">Select Role</option>
+                        <option value="Student">Student</option>
+                        <option value="Teacher">Teacher</option>
+                        <option value="Staff">Staff</option>
+                        <option value="Admin">Administrator</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password<span class="required">*</span></label>
+                <div class="input-wrapper">
+                    <span class="input-icon">🔒</span>
+                    <input type="password" class="form-control" id="password" asp-for="Password" placeholder="Create a strong password" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password<span class="required">*</span></label>
+                <div class="input-wrapper">
+                    <span class="input-icon">🔒</span>
+                    <input type="password" class="form-control" id="confirmPassword" asp-for="ConfirmPassword" placeholder="Re-enter password" required>
+                </div>
+            </div>
+
+            <div class="form-group full-width">
+                <label>Profile Photo (Optional)</label>
+                <div class="upload-area" onclick="document.getElementById('photoUpload').click()">
+                    <div class="upload-icon">📷</div>
+                    <div>Click to upload or drag and drop</div>
+                    <div style="font-size: 12px; color: #999; margin-top: 5px;">PNG, JPG up to 5MB</div>
+                </div>
+                <input type="file" id="photoUpload" asp-for="ProfilePhoto" accept="image/*" style="display: none;">
+            </div>
+        </div>
+
+        <div class="terms-agreement">
+            <input type="checkbox" id="terms" asp-for="AgreeToTerms" required>
+            <label for="terms" class="terms-text">
+                I agree to the <a href="/terms">Terms of Service</a> and <a href="/privacy">Privacy Policy</a>.
+                I understand that my information will be used to create my account and manage my profile within the educational institution.
+            </label>
+        </div>
+
+        <div class="button-group">
+            <button type="button" class="btn btn-secondary" onclick="window.location.href='/login'">Cancel</button>
+            <button type="submit" class="btn btn-primary">Create Account</button>
+        </div>
+
+        <div class="login-link">
+            Already have an account? <a href="/login">Sign in here</a>
+        </div>
+    </form>
+</div>
+
+@* <div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4">Register</h2>
+                    <form asp-action="Index" method="post">
+                        <div class="mb-3">
+                            <label asp-for="Username" class="form-label fw-semibold"></label>
+                            <input asp-for="Username" class="form-control" />
+                            <span asp-validation-for="Username" class="text-danger small"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label fw-semibold"></label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger small"></span>
+                        </div>
+                        <div class="mb-4">
+                            <label asp-for="Password" class="form-label fw-semibold"></label>
+                            <input asp-for="Password" type="password" class="form-control" />
+                            <span asp-validation-for="Password" class="text-danger small"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 fw-semibold">
+                            Register
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> *@

@@ -1,0 +1,3 @@
+dotnet ef migrations add coursemodel -s UserSegment -p UserSegment
+
+dotnet ef database update -s UserSegment -p UserSegment

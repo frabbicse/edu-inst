@@ -1,0 +1,117 @@
+﻿@model UserSegment.Models.CourseEntryModel
+
+
+<div class="page-header">
+    <h1 class="page-title">
+        <span>👨‍🏫</span>
+        Add New Courses
+    </h1>
+    <a href="@Url.Action("Index", "Home")" class="btn-back">← Back to Home</a>
+</div>
+
+<div class="container">
+    <div class="form-card">
+        <h2>📚 Course Information</h2>
+
+        @* <form method="post" asp-page-handler="SaveCourse"> *@
+        @using (Html.BeginForm("SaveCourseInfo", "Course", FormMethod.Post))
+        {
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Course Code<span style="color: red;">*</span></label>
+                    <input type="text" class="form-control" asp-for="CourseCode" placeholder="e.g., CS101, MATH201" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Course Name<span style="color: red;">*</span></label>
+                    <input type="text" class="form-control" asp-for="CourseName" placeholder="e.g., Introduction to Programming" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Department<span style="color: red;">*</span></label>
+                    <select class="form-control" asp-for="DepartmentId" required>
+                        <option value="">Select Department</option>
+                        <option value="1">Science</option>
+                        <option value="2">Mathematics</option>
+                        <option value="3">English</option>
+                        <option value="4">Computer Science</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Course Type<span style="color: red;">*</span></label>
+                    <select class="form-control" asp-for="CourseType" required>
+                        <option value="">Select Type</option>
+                        <option value="Theory">Theory</option>
+                        <option value="Practical">Practical</option>
+                        <option value="Theory + Practical">Theory + Practical</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Credits<span style="color: red;">*</span></label>
+                    <input type="number" class="form-control" asp-for="Credits" placeholder="Course credits" min="1" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Duration (Hours)<span style="color: red;">*</span></label>
+                    <input type="number" class="form-control" asp-for="DurationHours" placeholder="Total hours" min="1" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Instructor<span style="color: red;">*</span></label>
+                    <select class="form-control" asp-for="InstructorId" required>
+                        <option value="">Select Instructor</option>
+                        <option value="1">Dr. John Smith</option>
+                        <option value="2">Prof. Sarah Johnson</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Max Students</label>
+                    <input type="number" class="form-control" asp-for="MaxStudents" placeholder="Maximum enrollment" min="1">
+                </div>
+
+                <div class="form-group">
+                    <label>Start Date<span style="color: red;">*</span></label>
+                    <input type="date" class="form-control" asp-for="StartDate" required>
+                </div>
+
+                <div class="form-group">
+                    <label>End Date<span style="color: red;">*</span></label>
+                    <input type="date" class="form-control" asp-for="EndDate" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Prerequisites</label>
+                    <input type="text" class="form-control" asp-for="Prerequisites" placeholder="e.g., Basic Mathematics">
+                </div>
+
+                <div class="form-group">
+                    <label>Status<span style="color: red;">*</span></label>
+                    <select class="form-control" asp-for="Status" required>
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                </div>
+
+                <div class="form-group" style="grid-column: 1 / -1;">
+                    <label>Course Description<span style="color: red;">*</span></label>
+                    <textarea class="form-control" asp-for="Description" placeholder="Detailed course description" style="min-height: 100px;" required></textarea>
+                </div>
+
+                <div class="form-group" style="grid-column: 1 / -1;">
+                    <label>Learning Objectives</label>
+                    <textarea class="form-control" asp-for="LearningObjectives" placeholder="What students will learn" style="min-height: 80px;"></textarea>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 15px; justify-content: flex-end; margin-top: 30px;">
+                <button type="button" onclick="history.back()" style="padding: 12px 30px; background: #f0f0f0; border: none; border-radius: 8px; cursor: pointer;">Cancel</button>
+                <button type="submit" class="btn-primary">💾 Save Course</button>
+            </div>
+        }
+        @* </form> *@
+    </div>
+</div>

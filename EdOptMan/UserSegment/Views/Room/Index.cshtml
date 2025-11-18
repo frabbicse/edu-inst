@@ -1,0 +1,94 @@
+﻿@model IEnumerable<UserSegment.Models.RoomEntryModel>
+
+@{
+    ViewData["Title"] = "Room List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var res = ViewBag.Success;
+}
+
+@if (res?.Result == true)
+{
+    <div style="background-color: #d4edda; color: #155724; padding: 12px; border-radius: 6px; margin-bottom: 15px;">
+        ✅ Room information saved/updated successfully!
+    </div>
+}
+@if (res?.Result == false)
+{
+    <div style="background-color: #f8d7da; color: #721c24; padding: 12px; border-radius: 6px; margin-bottom: 15px;">
+        ❌ Failed to save Room information. Please try again.
+    </div>
+}
+
+<div class="container">
+    <div class="page-header">
+        <h1 class="page-title">
+            <span>📘</span>
+            Room List
+        </h1>
+        <a href="@Url.Action("Index", "Home")" class="btn-back">← Back to Home</a>
+    </div>
+
+    <div class="page-header">
+        <h2>🎓 Manage Rooms</h2>
+        <a href="@Url.Action("RoomInfo", "Room")" class="btn-primary">➕ Add New Room</a>
+    </div>
+
+    <div class="table-wrapper">
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Room Number</th>
+                    <th>Room Name</th>
+                    <th>Room Type</th>
+                    <th>Building Id</th>
+                    <th>Floor</th>
+                    <th>Capacity</th>
+                    <th>Area</th>
+                    <th>Status</th>
+                    <th>Faciliteis</th>
+                    <th>Description</th>
+                    <th style="width: 180px;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var course in Model)
+                    {
+                        <tr>
+                            <td>@course.RoomNumber</td>
+                            <td>@course.RoomName</td>
+                            <td>@course.RoomType</td> <!-- replace with DepartmentName if available -->
+                            <td>@course.BuildingId</td>
+                            <td>@course.Floor</td>
+                            <td>@course.Capacity</td>
+                            <td>@course.Area</td>
+                            <td>
+                                <span style="color:@(course.Status == "Active" ? "green" : "red"); font-weight:600;">
+                                    @course.Status
+                                </span>
+                            </td>
+                            <td>@(course.Facilities != null ? string.Join(", ", course.Facilities) : "")</td>
+                            <td>@course.Description</td>
+                            <td class="actions">
+                                <a href="@Url.Action("EditRoom", "Room", new { id = course.Id })" class="btn-edit">✏️ Edit</a>
+                                <a href="@Url.Action("RoomDetail", "Room", new { id = course.Id })" class="btn-view">👁️ View</a>
+                                @using (Html.BeginForm("DeleteConfirmed", "Room", new { id = course.Id }, FormMethod.Post, null, new { @class = "inline-form", onsubmit = "return confirm('Are you sure you want to delete this course?');" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn-delete">🗑️ Delete</button>
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="9" style="text-align:center; padding:20px;">No courses found.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

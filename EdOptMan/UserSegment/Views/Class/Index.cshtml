@@ -1,0 +1,78 @@
+﻿@model IEnumerable<UserSegment.Models.ClassEntryModel>
+
+@{
+    ViewData["Title"] = "Class List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var res = @ViewBag.Success; 
+}
+
+@if (res?.Result == true)
+{
+    <div style="background-color: #d4edda; color: #155724; padding: 12px; border-radius: 6px; margin-bottom: 15px;">
+        Class information saved/updated successfully!
+    </div>
+}
+@if (res?.Result == false)
+{
+    <div style="background-color: #f8d7da; color: #721c24; padding: 12px; border-radius: 6px; margin-bottom: 15px;">
+        Failed to save class information. Please try again.
+    </div>
+}
+
+
+<div class="container">
+    <div class="page-header">
+        <h1 class="page-title">
+            <span>👨‍🏫</span>
+            Class List
+        </h1>
+        <a href="@Url.Action("Index", "Home")" class="btn-back">← Back to Home</a>
+    </div>
+    <div class="page-header">
+        <h2>📚 Add New Class</h2>
+        <a href="@Url.Action("ClassInfo", "Class")" class="btn-primary">➕ Add New Class</a>
+    </div>    
+    <div class="table-wrapper">
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Class Name</th>
+                    <th>Section</th>
+                    @* <th>Teacher</th>
+                    <th>Room</th> *@
+                    <th>Capacity</th>
+                    <th>Academic Year</th>
+                    <th style="width: 150px;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var cls in Model)
+                    {
+                        <tr>
+                            <td>@cls.ClassName</td>
+                            <td>@cls.Section</td>
+                            @* <td>@cls.ClassTeacherName</td> *@
+                            @* <td>@cls.RoomNumber</td> *@
+                            <td>@cls.Capacity</td>
+                            <td>@cls.AcademicYear</td>
+                            <td class="actions">
+                                <a href="@Url.Action("EditClass", "Class", new { id = cls.Id })" class="btn-edit">✏️ Edit</a>
+                                <a href="@Url.Action("Details", "Class", new { id = cls.Id })" class="btn-view">👁️ View</a>
+                                <a href="@Url.Action("Delete", "Class", new { id = cls.Id })" class="btn-delete">🗑️ Delete</a>
+                                
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="7" style="text-align:center; padding:20px;">No classes found.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

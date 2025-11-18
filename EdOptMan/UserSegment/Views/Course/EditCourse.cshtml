@@ -1,0 +1,126 @@
+﻿@model UserSegment.Models.CourseEntryModel
+
+@{
+    ViewData["Title"] = "Update Course";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+    <h1 class="page-title">
+        <span>📝</span>
+        Update Course Information
+    </h1>
+    <a href="@Url.Action("Index", "Course")" class="btn-back">← Back to Course List</a>
+</div>
+
+<div class="container">
+    <div class="form-card">
+        <h2>📚 Edit Course Details</h2>
+
+        @using (Html.BeginForm("UpdateCourseInfo", "Course", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Course Code<span style="color: red;">*</span></label>
+                    @Html.TextBoxFor(model => model.CourseCode, new { @class = "form-control", placeholder = "e.g., CS101", required = "required" })
+                </div>
+
+                <div class="form-group">
+                    <label>Course Name<span style="color: red;">*</span></label>
+                    @Html.TextBoxFor(model => model.CourseName, new { @class = "form-control", placeholder = "e.g., Introduction to Programming", required = "required" })
+                </div>
+
+                <div class="form-group">
+                    <label>Department<span style="color: red;">*</span></label>
+                    @Html.DropDownListFor(model => model.DepartmentId,
+                    new SelectList(new[]
+                    {
+                                new { Value = "1", Text = "Science" },
+                                new { Value = "2", Text = "Mathematics" },
+                                new { Value = "3", Text = "English" },
+                                new { Value = "4", Text = "Computer Science" }
+                                }, "Value", "Text", Model.DepartmentId),
+                                "Select Department", new { @class = "form-control", required = "required" })
+            </div>
+
+            <div class="form-group">
+                <label>Course Type<span style="color: red;">*</span></label>
+                @Html.DropDownListFor(model => model.CourseType,
+                                new SelectList(new[] {
+                                "Theory", "Practical", "Theory + Practical"
+                                }, Model.CourseType),
+                                "Select Type", new { @class = "form-control", required = "required" })
+            </div>
+
+            <div class="form-group">
+                <label>Credits<span style="color: red;">*</span></label>
+                @Html.TextBoxFor(model => model.Credits, new { type = "number", min = "1", @class = "form-control", required = "required" })
+            </div>
+
+            <div class="form-group">
+                <label>Duration (Hours)<span style="color: red;">*</span></label>
+                @Html.TextBoxFor(model => model.DurationHours, new { type = "number", min = "1", @class = "form-control", required = "required" })
+            </div>
+
+            <div class="form-group">
+                <label>Instructor<span style="color: red;">*</span></label>
+                @Html.DropDownListFor(model => model.InstructorId,
+                                new SelectList(new[]
+                                {
+                                new { Value = "1", Text = "Dr. John Smith" },
+                                new { Value = "2", Text = "Prof. Sarah Johnson" }
+                                }, "Value", "Text", Model.InstructorId),
+                                "Select Instructor", new { @class = "form-control", required = "required" })
+            </div>
+
+            <div class="form-group">
+                <label>Max Students</label>
+                @Html.TextBoxFor(model => model.MaxStudents, new { type = "number", min = "1", @class = "form-control", placeholder = "Maximum enrollment" })
+            </div>
+
+            <div class="form-group">
+                <label>Start Date<span style="color: red;">*</span></label>
+                @Html.TextBoxFor(model => model.StartDate, "{0:yyyy-MM-dd}", new { type = "date", @class = "form-control", required = "required" })
+            </div>
+
+            <div class="form-group">
+                <label>End Date<span style="color: red;">*</span></label>
+                @Html.TextBoxFor(model => model.EndDate, "{0:yyyy-MM-dd}", new { type = "date", @class = "form-control", required = "required" })
+            </div>
+
+            <div class="form-group">
+                <label>Prerequisites</label>
+                @Html.TextBoxFor(model => model.Prerequisites, new { @class = "form-control", placeholder = "e.g., Basic Mathematics" })
+            </div>
+
+            <div class="form-group">
+                <label>Status<span style="color: red;">*</span></label>
+                @Html.DropDownListFor(model => model.Status,
+                                new SelectList(new[] { "Active", "Inactive", "Completed" }, Model.Status),
+                                new { @class = "form-control", required = "required" })
+            </div>
+
+            <div class="form-group" style="grid-column: 1 / -1;">
+                <label>Course Description<span style="color: red;">*</span></label>
+                @Html.TextAreaFor(model => model.Description, 5, 50,
+                                new { @class = "form-control", placeholder = "Detailed course description", required = "required" })
+            </div>
+
+            <div class="form-group" style="grid-column: 1 / -1;">
+                <label>Learning Objectives</label>
+                @Html.TextAreaFor(model => model.LearningObjectives, 4, 50,
+                                new { @class = "form-control", placeholder = "What students will learn" })
+            </div>
+        </div>
+
+        <div style="display: flex; gap: 15px; justify-content: flex-end; margin-top: 30px;">
+            <a href="@Url.Action("Index", "Course")" class="btn-cancel" style="padding: 12px 30px; background: #f0f0f0; border: none; border-radius: 8px; text-decoration:none; color:#333;">Cancel</a>
+            <button type="submit" class="btn-primary">💾 Update Course</button>
+        </div>
+                }
+    </div>
+</div>
+

@@ -1,0 +1,92 @@
+﻿@model UserSegment.Models.RoomEntryModel
+
+@{
+    ViewData["Title"] = "Room Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="page-header">
+        <h1 class="page-title">
+            <span>🏨</span>
+            Room Details
+        </h1>
+        <a href="@Url.Action("Index", "Room")" class="btn-back">← Back to Room List</a>
+    </div>
+
+    <div class="details-card">
+        <h2>@Model.RoomName (@Model.RoomNumber)</h2>
+        <p class="subtitle">Room Type: <strong>@Model.RoomType</strong></p>
+        <hr />
+
+        <div class="details-grid">
+
+            <div class="detail-item">
+                <label>🏢 Building</label>
+                <p>@Model.BuildingId</p> @* Replace with building name if available *@
+            </div>
+
+            <div class="detail-item">
+                <label>📍 Floor</label>
+                <p>@Model.Floor</p>
+            </div>
+
+            <div class="detail-item">
+                <label>👥 Capacity</label>
+                <p>@Model.Capacity</p>
+            </div>
+
+            <div class="detail-item">
+                <label>📐 Area (sq ft)</label>
+                <p>@(Model.Area.HasValue? Model.Area.ToString() : "N/A")</p>
+            </div>
+
+            <div class="detail-item">
+                <label>📌 Status</label>
+                <p style="color:@(Model.Status == "Available" ? "green" : "red"); font-weight:600;">
+                    @Model.Status
+                </p>
+            </div>
+
+        </div>
+
+        <hr />
+
+        <div class="detail-section">
+            <h3>🛠 Facilities</h3>
+
+            @if (Model.Facilities != null && Model.Facilities.Any())
+            {
+                <ul>
+                    @foreach (var f in Model.Facilities)
+                    {
+                        <li>@f</li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p>No facilities listed.</p>
+            }
+        </div>
+
+        @if (!string.IsNullOrWhiteSpace(Model.Description))
+        {
+            <div class="detail-section">
+                <h3>📝 Description</h3>
+                <p>@Model.Description</p>
+            </div>
+        }
+
+        <div class="actions">
+            <a href="@Url.Action("EditRoom", "Room", new { id = Model.Id })" class="btn-edit">✏️ Edit</a>
+
+            @using (Html.BeginForm("DeleteConfirmed", "Room", new { id = Model.Id }, FormMethod.Post, null,
+                        new { @class = "inline-form", onsubmit = "return confirm('Are you sure you want to delete this room?');" }))
+            {
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn-delete">🗑️ Delete</button>
+            }
+        </div>
+    </div>
+</div>

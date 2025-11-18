@@ -1,0 +1,83 @@
+﻿@model UserSegment.Models.StaffEntryModel
+
+@{
+    ViewData["Title"] = "Staff Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+
+    <div class="page-header">
+        <h1 class="page-title">
+            <span>👔</span>
+            Staff Details
+        </h1>
+        <a href="@Url.Action("Index", "Staff")" class="btn-back">← Back to List</a>
+    </div>
+
+    <div class="details-card">
+        <h2>@Model.FirstName @Model.LastName (@Model.StaffId)</h2>
+        <p class="subtitle">Department: <strong>@Model.DepartmentId</strong></p>
+
+        <hr />
+
+        <div class="details-grid">
+
+            <div class="detail-item">
+                <label>Email</label>
+                <p>@Model.Email</p>
+            </div>
+
+            <div class="detail-item">
+                <label>Phone</label>
+                <p>@Model.PhoneNumber</p>
+            </div>
+
+            <div class="detail-item">
+                <label>Gender</label>
+                <p>@Model.Gender</p>
+            </div>
+
+            <div class="detail-item">
+                <label>Date of Birth</label>
+                <p>@Model.DateOfBirth.ToString("dd MMM yyyy")</p>
+            </div>
+
+            <div class="detail-item">
+                <label>Join Date</label>
+                <p>@Model.JoinDate.ToString("dd MMM yyyy")</p>
+            </div>
+
+            <div class="detail-item">
+                <label>Employment Type</label>
+                <p>@Model.EmploymentType</p>
+            </div>
+
+            <div class="detail-item">
+                <label>Salary</label>
+                <p>@Model.Salary</p>
+            </div>
+
+            <div class="detail-item">
+                <label>Blood Group</label>
+                <p>@(string.IsNullOrWhiteSpace(Model.BloodGroup) ? "N/A" : Model.BloodGroup)</p>
+            </div>
+
+            <div class="detail-item" style="grid-column:1 / -1;">
+                <label>Address</label>
+                <p>@Model.Address</p>
+            </div>
+
+        </div>
+
+        <div class="actions">
+            <a href="@Url.Action("EditStaff", "Staff", new { id = Model.Id })" class="btn-edit">✏️ Edit</a>
+
+            @using (Html.BeginForm("DeleteConfirmed", "Staff", new { id = Model.Id }, FormMethod.Post, null, new { @class = "inline-form", onsubmit = "return confirm('Delete this staff?');" }))
+            {
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn-delete">🗑️ Delete</button>
+            }
+        </div>
+    </div>
+</div>

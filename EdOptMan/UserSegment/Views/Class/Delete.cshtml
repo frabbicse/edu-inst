@@ -1,0 +1,78 @@
+﻿@model UserSegment.Models.ClassEntryModel
+@{
+    ViewData["Title"] = "Delete Class";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+    <h1 class="page-title">
+        <span>🗑️</span>
+        Delete Class
+    </h1>
+    <a href="@Url.Action("Index", "Class")" class="btn-back">← Back to List</a>
+</div>
+
+<div class="container">
+    <div class="form-card">
+        <h2>⚠️ Are you sure you want to delete this class?</h2>
+        <p style="color: #888; margin-bottom: 25px;">This action cannot be undone. Please confirm before proceeding.</p>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Class Name</label>
+                <input type="text" class="form-control" value="@Model.ClassName" readonly />
+            </div>
+
+            <div class="form-group">
+                <label>Section</label>
+                <input type="text" class="form-control" value="@Model.Section" readonly />
+            </div>
+
+            @* <div class="form-group">
+                <label>Class Teacher</label>
+                <input type="text" class="form-control" value="@Model.ClassTeacherName" readonly />
+            </div> *@
+
+            @* <div class="form-group">
+                <label>Room Number</label>
+                <input type="text" class="form-control" value="@Model.RoomName" readonly />
+            </div> *@
+
+            <div class="form-group">
+                <label>Capacity</label>
+                <input type="text" class="form-control" value="@Model.Capacity" readonly />
+            </div>
+
+            <div class="form-group">
+                <label>Academic Year</label>
+                <input type="text" class="form-control" value="@Model.AcademicYear" readonly />
+            </div>
+
+            <div class="form-group" style="grid-column: 1 / -1;">
+                <label>Class Schedule</label>
+                <textarea class="form-control" readonly>@Model.Schedule</textarea>
+            </div>
+
+            <div class="form-group" style="grid-column: 1 / -1;">
+                <label>Description</label>
+                <textarea class="form-control" readonly>@Model.Description</textarea>
+            </div>
+        </div>
+
+        @using (Html.BeginForm("DeleteConfirmed", "Class", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.Id)
+
+            <div style="display: flex; gap: 15px; justify-content: flex-end; margin-top: 30px;">
+                <a href="@Url.Action("Index", "Class")"
+                   style="padding: 12px 30px; background: #f0f0f0; border: none; border-radius: 8px; text-decoration:none; color:#333;">Cancel</a>
+
+                <button type="submit"
+                        style="padding: 12px 30px; background: #dc3545; color: white; border: none; border-radius: 8px; cursor: pointer;">
+                    🗑️ Delete Class
+                </button>
+            </div>
+        }
+    </div>
+</div>

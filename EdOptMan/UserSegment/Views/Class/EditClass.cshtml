@@ -1,0 +1,80 @@
+﻿@model UserSegment.Models.ClassEntryModel
+@{
+    ViewData["Title"] = "Edit Class";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+    <h1 class="page-title">
+        <span>✏️</span>
+        Edit Class
+    </h1>
+    <a href="@Url.Action("Index", "Class")" class="btn-back">← Back to List</a>
+</div>
+
+<div class="container">
+    <div class="form-card">
+        <h2>🏫 Update Class Information</h2>
+
+        @using (Html.BeginForm("UpdateClassInfo", "Class", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Class Name<span style="color: red;">*</span></label>
+                    <input type="text" class="form-control" asp-for="ClassName" placeholder="e.g., Grade 10" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Section<span style="color: red;">*</span></label>
+                    <input type="text" class="form-control" asp-for="Section" placeholder="e.g., A, B, C" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Class Teacher<span style="color: red;">*</span></label>
+                    <select class="form-control" asp-for="ClassTeacherId" required>
+                        <option value="">Select Teacher</option>
+                        <option value="1">John Smith</option>
+                        <option value="2">Sarah Johnson</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Room Number<span style="color: red;">*</span></label>
+                    <select class="form-control" asp-for="RoomId" required>
+                        <option value="">Select Room</option>
+                        <option value="1">Room 101</option>
+                        <option value="2">Room 102</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Capacity<span style="color: red;">*</span></label>
+                    <input type="number" class="form-control" asp-for="Capacity" placeholder="Maximum students" min="1" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Academic Year<span style="color: red;">*</span></label>
+                    <input type="text" class="form-control" asp-for="AcademicYear" placeholder="2024-2025" required>
+                </div>
+
+                <div class="form-group" style="grid-column: 1 / -1;">
+                    <label>Class Schedule</label>
+                    <textarea class="form-control" asp-for="Schedule" placeholder="Enter class schedule details"></textarea>
+                </div>
+
+                <div class="form-group" style="grid-column: 1 / -1;">
+                    <label>Description</label>
+                    <textarea class="form-control" asp-for="Description" placeholder="Additional class information"></textarea>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 15px; justify-content: flex-end; margin-top: 30px;">
+                <a href="@Url.Action("Index", "Class")" style="padding: 12px 30px; background: #f0f0f0; border: none; border-radius: 8px; text-decoration:none; color:#333;">Cancel</a>
+                <button type="submit" class="btn-primary">💾 Update Class</button>
+            </div>
+        }
+    </div>
+</div>

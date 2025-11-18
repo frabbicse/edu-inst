@@ -1,0 +1,159 @@
+﻿@model UserSegment.Models.HomeModel
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="header">
+    <div class="header-left">
+        <div class="logo">🎓 EduManage</div>
+        <nav class="nav-links">
+            <a href="@Url.Action("Index", "Home")">Dashboard</a>
+            <a href="@Url.Action("Index", "Student")">Students</a>
+            <a href="@Url.Action("Index", "Teacher")">Teachers</a>
+            <a href="@Url.Action("Index", "Course")">Courses</a>
+            <a href="@Url.Action("Index", "Class")">Class</a>
+            <a href="@Url.Action("Index", "Staff")">Staff</a>
+            <a href="@Url.Action("Index", "Room")">Room</a>
+            <a href="@Url.Action("Index", "Course")">Reports</a>
+        </nav>
+    </div>
+    <div class="header-right">
+        <div class="user-info">
+            <div class="user-avatar">👤</div>
+            <div>
+                <div style="font-weight: 600;">@Model.CurrentUser</div>
+                <div style="font-size: 12px; opacity: 0.8;">Administrator</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="welcome-section">
+        <h1>Welcome back, @Model.CurrentUser! 👋</h1>
+        <p>Here's what's happening in your institute today</p>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card students">
+            <div class="stat-icon">👨‍🎓</div>
+            <div class="stat-label">Total Students</div>
+            <div class="stat-value">@Model.TotalStudents</div>
+            <div class="stat-change positive">
+                ↑ +@Model.NewStudentsThisMonth new this month
+            </div>
+        </div>
+
+        <div class="stat-card teachers">
+            <div class="stat-icon">👨‍🏫</div>
+            <div class="stat-label">Total Teachers</div>
+            <div class="stat-value">@Model.TotalTeachers</div>
+            <div class="stat-change positive">
+                ↑ +@Model.NewTeachersThisMonth new this month
+            </div>
+        </div>
+
+        <div class="stat-card courses">
+            <div class="stat-icon">📚</div>
+            <div class="stat-label">Active Courses</div>
+            <div class="stat-value">@Model.TotalCourses</div>
+            <div class="stat-change positive">
+                @Model.ActiveCoursesPercentage% completion rate
+            </div>
+        </div>
+
+        <div class="stat-card staff">
+            <div class="stat-icon">👥</div>
+            <div class="stat-label">Staff Members</div>
+            <div class="stat-value">@Model.TotalStaff</div>
+            <div class="stat-change">
+                @Model.DepartmentsCount departments
+            </div>
+        </div>
+    </div>
+
+    <div class="content-grid">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Enrollment Trends</h2>
+                <a href="/reports/enrollment" class="view-all">View Details →</a>
+            </div>
+            <div class="chart-container">
+                <div style="text-align: center;">
+                    <div style="font-size: 48px; margin-bottom: 10px;">📊</div>
+                    <div style="color: #666;">Monthly enrollment chart would appear here</div>
+                    <div style="font-size: 13px; color: #999; margin-top: 5px;">Integrate with Chart.js or similar library</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Recent Activity</h2>
+            </div>
+            <ul class="activity-list">
+                <li class="activity-item">
+                    <div class="activity-icon blue">👨‍🎓</div>
+                    <div class="activity-content">
+                        <div class="activity-title">New Student Enrolled</div>
+                        <div class="activity-time">John Doe - 2 hours ago</div>
+                    </div>
+                </li>
+                <li class="activity-item">
+                    <div class="activity-icon green">✅</div>
+                    <div class="activity-content">
+                        <div class="activity-title">Course Completed</div>
+                        <div class="activity-time">Advanced Mathematics - 4 hours ago</div>
+                    </div>
+                </li>
+                <li class="activity-item">
+                    <div class="activity-icon purple">👨‍🏫</div>
+                    <div class="activity-content">
+                        <div class="activity-title">Teacher Assignment</div>
+                        <div class="activity-time">Dr. Smith assigned to Physics - 1 day ago</div>
+                    </div>
+                </li>
+                <li class="activity-item">
+                    <div class="activity-icon blue">📝</div>
+                    <div class="activity-content">
+                        <div class="activity-title">Exam Scheduled</div>
+                        <div class="activity-time">Biology Final - Next week</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title">Quick Actions</h2>
+        </div>
+        <div class="quick-actions">
+            <a href="/students/add" class="action-btn">
+                <div class="action-btn-icon">👨‍🎓</div>
+                <div class="action-btn-text">Add Student</div>
+            </a>
+            <a href="/teachers/add" class="action-btn">
+                <div class="action-btn-icon">👨‍🏫</div>
+                <div class="action-btn-text">Add Teacher</div>
+            </a>
+            <a href="/courses/add" class="action-btn">
+                <div class="action-btn-icon">📚</div>
+                <div class="action-btn-text">Add Course</div>
+            </a>
+            <a href="/classes/add" class="action-btn">
+                <div class="action-btn-icon">🏫</div>
+                <div class="action-btn-text">Add Class</div>
+            </a>
+            <a href="/rooms/add" class="action-btn">
+                <div class="action-btn-icon">🚪</div>
+                <div class="action-btn-text">Add Room</div>
+            </a>
+            <a href="/staff/add" class="action-btn">
+                <div class="action-btn-icon">👥</div>
+                <div class="action-btn-text">Add Staff</div>
+            </a>
+        </div>
+    </div>
+</div>

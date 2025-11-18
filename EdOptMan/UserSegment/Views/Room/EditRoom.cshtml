@@ -1,0 +1,137 @@
+﻿@model UserSegment.Models.RoomEntryModel
+
+@{
+    ViewData["Title"] = "Update Room";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+    <h1 class="page-title">
+        <span>📝</span>
+        Update Room Information
+    </h1>
+    <a href="@Url.Action("Index", "Room")" class="btn-back">← Back to Room List</a>
+</div>
+
+<div class="container">
+    <div class="form-card">
+        <h2>📚 Edit Room Details</h2>
+
+        @using (Html.BeginForm("UpdateRoomInfo", "Room", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Room Number<span style="color: red;">*</span></label>
+                    <input type="text" class="form-control" asp-for="RoomNumber" placeholder="e.g., 101, A-205" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Room Name</label>
+                    <input type="text" class="form-control" asp-for="RoomName" placeholder="e.g., Science Lab">
+                </div>
+
+                <div class="form-group">
+                    <label>Room Type<span style="color: red;">*</span></label>
+                    <select class="form-control" asp-for="RoomType" required>
+                        <option value="">Select Type</option>
+                        <option value="Classroom">Classroom</option>
+                        <option value="Laboratory">Laboratory</option>
+                        <option value="Library">Library</option>
+                        <option value="Computer Lab">Computer Lab</option>
+                        <option value="Auditorium">Auditorium</option>
+                        <option value="Staff Room">Staff Room</option>
+                        <option value="Conference Room">Conference Room</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Building<span style="color: red;">*</span></label>
+                    <select class="form-control" asp-for="BuildingId" required>
+                        <option value="">Select Building</option>
+                        <option value="1">Main Building</option>
+                        <option value="2">Science Block</option>
+                        <option value="3">Admin Block</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Floor<span style="color: red;">*</span></label>
+                    <select class="form-control" asp-for="Floor" required>
+                        <option value="">Select Floor</option>
+                        <option value="Ground">Ground Floor</option>
+                        <option value="1">First Floor</option>
+                        <option value="2">Second Floor</option>
+                        <option value="3">Third Floor</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Capacity<span style="color: red;">*</span></label>
+                    <input type="number" class="form-control" asp-for="Capacity" placeholder="Maximum capacity" min="1" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Area (sq. ft.)</label>
+                    <input type="number" class="form-control" asp-for="Area" placeholder="Room area" min="0">
+                </div>
+
+                <div class="form-group">
+                    <label>Status<span style="color: red;">*</span></label>
+                    <select class="form-control" asp-for="Status" required>
+                        <option value="Available">Available</option>
+                        <option value="Occupied">Occupied</option>
+                        <option value="Under Maintenance">Under Maintenance</option>
+                    </select>
+                </div>
+
+                <div class="form-group" style="grid-column: 1 / -1;">
+                    <label>Facilities Available</label>
+                    <div class="checkbox-group">
+                         
+                           <label class="checkbox-option">
+                            <input type="checkbox" name="Facilities" value="Projector" checked="@(Model.Facilities.Contains("Projector"))">
+                            <span>Projector</span>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="Facilities" value="Whiteboard" checked="@(Model.Facilities.Contains("Whiteboard"))">
+                            <span>Whiteboard</span>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="Facilities" value="AC" checked="@(Model.Facilities.Contains("AC"))">
+                            <span>Air Conditioning</span>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="Facilities" value="WiFi" checked="@(Model.Facilities.Contains("WiFi"))">
+                            <span>WiFi</span>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="Facilities" value="Smart Board" checked="@(Model.Facilities.Contains("Smart Board"))">
+                            <span>Smart Board</span>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="Facilities" value="Computer" checked="@(Model.Facilities.Contains("Computer"))">
+                            <span>Computers</span>
+                        </label>                      
+    
+                        
+                    </div>
+                </div>
+
+                <div class="form-group" style="grid-column: 1 / -1;">
+                    <label>Description</label>
+                    <textarea class="form-control" asp-for="Description" placeholder="Additional room information"></textarea>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 15px; justify-content: flex-end; margin-top: 30px;">
+                <button type="button" onclick="history.back()" style="padding: 12px 30px; background: #f0f0f0; border: none; border-radius: 8px; cursor: pointer;">Cancel</button>
+                <button type="submit" class="btn-primary">💾 Update Room</button>
+            </div>
+
+        }
+    </div>
+</div>
+

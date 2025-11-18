@@ -1,0 +1,76 @@
+﻿@model IEnumerable<UserSegment.Models.StaffEntryModel>
+
+@{
+    ViewData["Title"] = "Staff List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var res = @ViewBag.Success;
+}
+
+@if (res?.Result == true)
+{
+    <div style="background-color: #d4edda; color: #155724; padding: 12px; border-radius: 6px; margin-bottom: 15px;">
+        Class information saved/updated successfully!
+    </div>
+}
+@if (res?.Result == false)
+{
+    <div style="background-color: #f8d7da; color: #721c24; padding: 12px; border-radius: 6px; margin-bottom: 15px;">
+        Failed to save class information. Please try again.
+    </div>
+}
+
+<div class="container">
+    <div class="page-header">
+        <h1 class="page-title">
+            <span>👨‍🏫</span>
+            Staff List
+        </h1>
+        <a href="@Url.Action("Index", "Home")" class="btn-back">← Back to Home</a>
+    </div>
+    <div class="page-header">
+        
+        <h2>
+            <span>📋 </span>  Staff List
+        </h2>
+        <a href="@Url.Action("StaffInfo", "Staff")" class="btn-primary">➕ Add Staff</a>
+    </div>
+
+    <div class="table-wrapper">
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Staff ID</th>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Phone</th>
+                    <th>Employment Type</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var s in Model)
+                {
+                    <tr>
+                        <td>@s.StaffId</td>
+                        <td>@s.FirstName @s.LastName</td>
+                        <td>@s.DepartmentId</td>
+                        <td>@s.PhoneNumber</td>
+                        <td>@s.EmploymentType</td>
+
+                        <td class="actions">
+                            <a href="@Url.Action("StaffDetail", "Staff", new { id = s.Id })" class="btn-edit"> 👁️View</a>
+                            <a href="@Url.Action("EditStaff", "Staff", new { id = s.Id })" class="btn-edit"> ✏️Edit</a>
+
+                            @using (Html.BeginForm("DeleteConfirmed", "Staff", new { id = s.Id }, FormMethod.Post, null, new { onsubmit = "return confirm('Are you sure?');" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn-delete">🗑️Delete</button>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
