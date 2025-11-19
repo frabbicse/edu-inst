@@ -8,12 +8,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
 builder.Services.AddScoped<LoginService>();
 builder.Services.AddScoped<RegistrationService>();
 builder.Services.AddScoped<IClassService, ClassService>();
 builder.Services.AddScoped<ICourseService, CourseService>();
 builder.Services.AddScoped<IRoomService, RoomService>();
 builder.Services.AddScoped<IStaffService, StaffService>();
+builder.Services.AddScoped<IStudentService, StudentService>();
+builder.Services.AddScoped<ITeacherService, TeacherService>();
+
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {

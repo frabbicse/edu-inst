@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UserSegment.Models
 {
-    public class StudentEntryModel
+    public class StudentEntryModel : BaseModel
     {
         // 🔹 Personal Information
         [Required, Display(Name = "First Name")]
@@ -88,6 +89,7 @@ namespace UserSegment.Models
 
         // 🔹 Profile Photo
         [Display(Name = "Profile Photo")]
+        [NotMapped]
         public IFormFile? ProfilePhoto { get; set; }
 
         public string? ProfilePhotoPath { get; set; }

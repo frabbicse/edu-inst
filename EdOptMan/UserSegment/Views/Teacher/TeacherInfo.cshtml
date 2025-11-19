@@ -1,0 +1,371 @@
+﻿@model UserSegment.Models.TeacherEntryModel
+@{
+    ViewData["Title"] = "Add Teacher";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="page-header">
+        <h1 class="page-title">
+            <span>👨‍🏫</span>
+            Add New Teacher
+        </h1>
+        <a href=@Url.ActionLink("Index","Teacher") class="btn-back">← Back to Teachers</a>
+    </div>
+
+    <div class="info-box">
+        ℹ️ Complete all required fields to register a new teacher in the system.
+    </div>
+
+    @using (Html.BeginForm("SaveTeacherInfo", "Teacher", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+    @* <form method="post" asp-page-handler="SaveTeacher" enctype="multipart/form-data"> *@
+        <div class="form-card">
+            <h3 class="section-title">📋 Personal Information</h3>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>First Name<span class="required">*</span></label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">👤</span>
+                        <input type="text" class="form-control" asp-for="FirstName" placeholder="Enter first name" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Middle Name</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">👤</span>
+                        <input type="text" class="form-control" asp-for="MiddleName" placeholder="Enter middle name">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Last Name<span class="required">*</span></label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">👤</span>
+                        <input type="text" class="form-control" asp-for="LastName" placeholder="Enter last name" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Date of Birth<span class="required">*</span></label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">📅</span>
+                        <input type="date" class="form-control" asp-for="DateOfBirth" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Gender<span class="required">*</span></label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">⚥</span>
+                        <select class="form-control" asp-for="Gender" required>
+                            <option value="">Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Marital Status</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">💑</span>
+                        <select class="form-control" asp-for="MaritalStatus">
+                            <option value="">Select Status</option>
+                            <option value="Single">Single</option>
+                            <option value="Married">Married</option>
+                            <option value="Divorced">Divorced</option>
+                            <option value="Widowed">Widowed</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="section-title">📞 Contact Information</h3>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Email Address<span class="required">*</span></label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">📧</span>
+                        <input type="email" class="form-control" asp-for="Email" placeholder="teacher@example.com" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Phone Number<span class="required">*</span></label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">📱</span>
+                        <input type="tel" class="form-control" asp-for="PhoneNumber" placeholder="+1 (555) 123-4567" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Alternate Phone</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">📞</span>
+                        <input type="tel" class="form-control" asp-for="AlternatePhone" placeholder="+1 (555) 987-6543">
+                    </div>
+                </div>
+
+                <div class="form-group full-width">
+                    <label>Address<span class="required">*</span></label>
+                    <textarea class="form-control" asp-for="Address" placeholder="Enter complete address" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>City<span class="required">*</span></label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">🏙️</span>
+                        <input type="text" class="form-control" asp-for="City" placeholder="Enter city" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>State/Province<span class="required">*</span></label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">🗺️</span>
+                        <input type="text" class="form-control" asp-for="State" placeholder="Enter state" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Zip Code<span class="required">*</span></label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">📮</span>
+                        <input type="text" class="form-control" asp-for="ZipCode" placeholder="Enter zip code" required>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="section-title">🎓 Professional Information</h3>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Teacher ID<span class="required">*</span></label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">🆔</span>
+                        <input type="text" class="form-control" asp-for="TeacherId" placeholder="Auto-generated or manual" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Join Date<span class="required">*</span></label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">📅</span>
+                        <input type="date" class="form-control" asp-for="JoinDate" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Department<span class="required">*</span></label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">🏛️</span>
+                        <select class="form-control" asp-for="DepartmentId" required>
+                            <option value="">Select Department</option>
+                            <option value="1">Science</option>
+                            <option value="2">Mathematics</option>
+                            <option value="3">English</option>
+                            <option value="4">Social Studies</option>
+                            <option value="5">Physical Education</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Designation<span class="required">*</span></label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">👔</span>
+                        <select class="form-control" asp-for="Designation" required>
+                            <option value="">Select Designation</option>
+                            <option value="Principal">Principal</option>
+                            <option value="Vice Principal">Vice Principal</option>
+                            <option value="Senior Teacher">Senior Teacher</option>
+                            <option value="Teacher">Teacher</option>
+                            <option value="Assistant Teacher">Assistant Teacher</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Qualification<span class="required">*</span></label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">🎓</span>
+                        <select class="form-control" asp-for="Qualification" required>
+                            <option value="">Select Qualification</option>
+                            <option value="PhD">PhD</option>
+                            <option value="Masters">Master's Degree</option>
+                            <option value="Bachelors">Bachelor's Degree</option>
+                            <option value="Diploma">Diploma</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Experience (Years)<span class="required">*</span></label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">⏳</span>
+                        <input type="number" class="form-control" asp-for="ExperienceYears" placeholder="Enter years of experience" min="0" required>
+                    </div>
+                </div>
+
+                <div class="form-group half-width">
+                    <label>Specialization</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">🔬</span>
+                        <input type="text" class="form-control" asp-for="Specialization" placeholder="e.g., Physics, Advanced Mathematics">
+                    </div>
+                </div>
+
+                <div class="form-group full-width">
+                    <label>Subjects Teaching<span class="required">*</span></label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="Subjects" value="Mathematics">
+                            <span>Mathematics</span>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="Subjects" value="Science">
+                            <span>Science</span>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="Subjects" value="English">
+                            <span>English</span>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="Subjects" value="History">
+                            <span>History</span>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="Subjects" value="Geography">
+                            <span>Geography</span>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="Subjects" value="Physics">
+                            <span>Physics</span>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="Subjects" value="Chemistry">
+                            <span>Chemistry</span>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="Subjects" value="Biology">
+                            <span>Biology</span>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="Subjects" value="Computer Science">
+                            <span>Computer Science</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="section-title">💰 Salary & Benefits</h3>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Basic Salary<span class="required">*</span></label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">💵</span>
+                        <input type="number" class="form-control" asp-for="BasicSalary" placeholder="Enter basic salary" min="0" step="0.01" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Bank Name</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">🏦</span>
+                        <input type="text" class="form-control" asp-for="BankName" placeholder="Enter bank name">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Account Number</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">💳</span>
+                        <input type="text" class="form-control" asp-for="AccountNumber" placeholder="Enter account number">
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="section-title">📄 Additional Information</h3>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Emergency Contact Name</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">👤</span>
+                        <input type="text" class="form-control" asp-for="EmergencyContactName" placeholder="Enter contact name">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Emergency Contact Number</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">🚨</span>
+                        <input type="tel" class="form-control" asp-for="EmergencyContactNumber" placeholder="+1 (555) 999-8888">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Blood Group</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">🩸</span>
+                        <select class="form-control" asp-for="BloodGroup">
+                            <option value="">Select Blood Group</option>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group full-width">
+                    <label>Notes/Remarks</label>
+                    <textarea class="form-control" asp-for="Notes" placeholder="Any additional information about the teacher"></textarea>
+                </div>
+            </div>
+
+            <h3 class="section-title">📷 Profile Photo</h3>
+
+            <div class="form-group">
+                <div class="photo-upload" onclick="document.getElementById('photoInput').click()">
+                    <img id="photoPreview" class="photo-preview" src="" alt="Preview">
+                    <div class="upload-icon">📸</div>
+                    <div><strong>Click to upload teacher photo</strong></div>
+                    <div style="font-size: 13px; color: #999; margin-top: 8px;">PNG, JPG up to 5MB</div>
+                </div>
+                <input type="file" id="photoInput" asp-for="ProfilePhoto" accept="image/*" style="display: none;" onchange="previewPhoto(event)">
+            </div>
+
+            <div class="button-group">
+                <button type="button" class="btn btn-secondary" onclick="window.location.href='/teachers'">Cancel</button>
+                <button type="submit" class="btn btn-primary">💾 Save Teacher</button>
+            </div>
+        </div>
+    @* </form> *@
+    }
+</div>
+
+<script>
+    function previewPhoto(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const preview = document.getElementById('photoPreview');
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+</script>

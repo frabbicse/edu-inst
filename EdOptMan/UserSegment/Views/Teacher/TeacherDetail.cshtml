@@ -1,0 +1,203 @@
+﻿@model UserSegment.Models.TeacherEntryModel
+
+@{
+    ViewData["Title"] = "Teacher Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="page-header">
+        <h1 class="page-title">
+            <span>👨‍🏫</span>
+            Teacher Details
+        </h1>
+        <a href="@Url.Action("Index", "Teacher")" class="btn-back">← Back to Teacher List</a>
+    </div>
+
+    <div class="details-card">
+
+        <h2>@Model.FirstName @Model.MiddleName @Model.LastName</h2>
+        <p class="subtitle">Teacher ID: <strong>@Model.TeacherId</strong></p>
+
+        <hr />
+
+        <div class="details-grid">
+
+            <div class="detail-item">
+                <label>📅 Date of Birth</label>
+                <p>@Model.DateOfBirth.ToString("dd MMM yyyy")</p>
+            </div>
+
+            <div class="detail-item">
+                <label>👤 Gender</label>
+                <p>@Model.Gender</p>
+            </div>
+
+            @if (!string.IsNullOrEmpty(Model.MaritalStatus))
+            {
+                <div class="detail-item">
+                    <label>💍 Marital Status</label>
+                    <p>@Model.MaritalStatus</p>
+                </div>
+            }
+
+            <div class="detail-item">
+                <label>📧 Email</label>
+                <p>@Model.Email</p>
+            </div>
+
+            <div class="detail-item">
+                <label>📞 Phone</label>
+                <p>@Model.PhoneNumber</p>
+            </div>
+
+            @if (!string.IsNullOrEmpty(Model.AlternatePhone))
+            {
+                <div class="detail-item">
+                    <label>📞 Alternate Phone</label>
+                    <p>@Model.AlternatePhone</p>
+                </div>
+            }
+
+            <div class="detail-item">
+                <label>📍 Address</label>
+                <p>@Model.Address</p>
+            </div>
+
+            <div class="detail-item">
+                <label>🏙 City</label>
+                <p>@Model.City</p>
+            </div>
+
+            <div class="detail-item">
+                <label>🌎 State</label>
+                <p>@Model.State</p>
+            </div>
+
+            <div class="detail-item">
+                <label>📮 Zip Code</label>
+                <p>@Model.ZipCode</p>
+            </div>
+
+            <div class="detail-item">
+                <label>🏫 Department</label>
+                <p>@Model.DepartmentId</p> @* Replace with department name if needed *@
+            </div>
+
+            <div class="detail-item">
+                <label>👔 Designation</label>
+                <p>@Model.Designation</p>
+            </div>
+
+            <div class="detail-item">
+                <label>🎓 Qualification</label>
+                <p>@Model.Qualification</p>
+            </div>
+
+            <div class="detail-item">
+                <label>📚 Experience (Years)</label>
+                <p>@Model.ExperienceYears</p>
+            </div>
+
+            @if (!string.IsNullOrEmpty(Model.Specialization))
+            {
+                <div class="detail-item">
+                    <label>🎯 Specialization</label>
+                    <p>@Model.Specialization</p>
+                </div>
+            }
+
+            <div class="detail-item">
+                <label>📅 Join Date</label>
+                <p>@Model.JoinDate.ToString("dd MMM yyyy")</p>
+            </div>
+
+            @if (Model.Subjects != null && Model.Subjects.Any())
+            {
+                <div class="detail-item">
+                    <label>📘 Subjects</label>
+                    <p>@string.Join(", ", Model.Subjects)</p>
+                </div>
+            }
+
+            <div class="detail-item">
+                <label>💰 Basic Salary</label>
+                <p>@Model.BasicSalary</p>
+            </div>
+
+            @if (!string.IsNullOrEmpty(Model.BankName))
+            {
+                <div class="detail-item">
+                    <label>🏦 Bank Name</label>
+                    <p>@Model.BankName</p>
+                </div>
+            }
+
+            @if (!string.IsNullOrEmpty(Model.AccountNumber))
+            {
+                <div class="detail-item">
+                    <label>💳 Account Number</label>
+                    <p>@Model.AccountNumber</p>
+                </div>
+            }
+
+            @if (!string.IsNullOrEmpty(Model.EmergencyContactName))
+            {
+                <div class="detail-item">
+                    <label>🚨 Emergency Contact Name</label>
+                    <p>@Model.EmergencyContactName</p>
+                </div>
+            }
+
+            @if (!string.IsNullOrEmpty(Model.EmergencyContactNumber))
+            {
+                <div class="detail-item">
+                    <label>📞 Emergency Contact Number</label>
+                    <p>@Model.EmergencyContactNumber</p>
+                </div>
+            }
+
+            @if (!string.IsNullOrEmpty(Model.BloodGroup))
+            {
+                <div class="detail-item">
+                    <label>🩸 Blood Group</label>
+                    <p>@Model.BloodGroup</p>
+                </div>
+            }
+
+            @if (!string.IsNullOrEmpty(Model.Notes))
+            {
+                <div class="detail-item" style="grid-column:1 / -1;">
+                    <label>📝 Notes</label>
+                    <p>@Model.Notes</p>
+                </div>
+            }
+
+            @if (!string.IsNullOrEmpty(Model.ProfilePhotoPath))
+            {
+                <div class="detail-item" style="grid-column:1 / -1;">
+                    <label>🖼 Profile Photo</label>
+                    <p>
+                        <img src="@Model.ProfilePhotoPath"
+                             alt="Profile Photo"
+                             style="max-width:150px; border-radius:10px;" />
+                    </p>
+                </div>
+            }
+
+        </div>
+
+        <hr />
+
+        <div class="actions">
+            <a href="@Url.Action("EditTeacher", "Teacher", new { id = Model.Id })" class="btn-edit">✏️ Edit</a>
+
+            @using (Html.BeginForm("DeleteConfirmed", "Teacher", new { id = Model.Id }, FormMethod.Post, null, new { @class = "inline-form", onsubmit = "return confirm('Are you sure you want to delete this teacher?');" }))
+            {
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn-delete">🗑️ Delete</button>
+            }
+        </div>
+
+    </div>
+</div>

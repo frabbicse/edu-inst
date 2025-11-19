@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UserSegment.Models
 {
-    public class TeacherEntryModel
+    public class TeacherEntryModel : BaseModel
     {
         // 🧍 Personal Info
         [Required]
@@ -46,10 +47,11 @@ namespace UserSegment.Models
         public int ExperienceYears { get; set; }
         public string Specialization { get; set; }
         [Required]
-        public string[] Subjects { get; set; }
+        public List<string> Subjects { get; set; }
 
         // 💰 Salary & Benefits
         [Required]
+        [Column(TypeName = "decimal(18,2)")]
         public decimal BasicSalary { get; set; }
         public string BankName { get; set; }
         public string AccountNumber { get; set; }
@@ -61,6 +63,9 @@ namespace UserSegment.Models
         public string Notes { get; set; }
 
         // 📷 Profile Photo
+        [NotMapped]
         public IFormFile ProfilePhoto { get; set; }
+        public string? ProfilePhotoPath { get; set; }
+
     }
 }

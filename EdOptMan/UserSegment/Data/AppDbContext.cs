@@ -43,5 +43,9 @@ namespace UserSegment.Data
         public DbSet<CourseEntryModel> CourseEntryModels { get; set; }
         public DbSet<RoomEntryModel> RoomEntryModels { get; set; }
         public DbSet<StaffEntryModel> StaffEntryModels { get; set; }
+        public DbSet<StudentEntryModel> StudentEntryModels { get; set; }
+        public DbSet<TeacherEntryModel> TeacherEntryModels { get; set; }
+
+
     }
 }

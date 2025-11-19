@@ -27,7 +27,6 @@ namespace UserSegment.Controllers
             return View();
         }
 
-
         // POST: Room/Insert
         [HttpPost]
         [ValidateAntiForgeryToken]

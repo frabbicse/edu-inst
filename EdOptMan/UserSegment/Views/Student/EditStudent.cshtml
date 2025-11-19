@@ -1,0 +1,189 @@
+﻿@model UserSegment.Models.StudentEntryModel
+
+@{
+    ViewData["Title"] = "Update Student";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+    <h1 class="page-title">
+        <span>📝</span>
+        Update Student Information
+    </h1>
+    <a href="@Url.Action("Index", "Student")" class="btn-back">← Back to Student List</a>
+</div>
+
+<div class="container">
+    <div class="form-card">
+        <h2>👨‍🎓 Edit Student Details</h2>
+
+        @using (Html.BeginForm("UpdateStudentInfo", "Student", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.Id)
+
+            <div class="form-row">
+
+                <!-- PERSONAL INFORMATION -->
+                <div class="form-group">
+                    <label>First Name<span style="color:red">*</span></label>
+                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", required = "required" })
+                </div>
+
+                <div class="form-group">
+                    <label>Middle Name</label>
+                    @Html.TextBoxFor(m => m.MiddleName, new { @class = "form-control" })
+                </div>
+
+                <div class="form-group">
+                    <label>Last Name<span style="color:red">*</span></label>
+                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", required = "required" })
+                </div>
+
+                <div class="form-group">
+                    <label>Date of Birth<span style="color:red">*</span></label>
+                    @Html.TextBoxFor(m => m.DateOfBirth, "{0:yyyy-MM-dd}", new { type = "date", @class = "form-control", required = "required" })
+                </div>
+
+                <div class="form-group">
+                    <label>Gender<span style="color:red">*</span></label>
+                    @Html.DropDownListFor(m => m.Gender,
+                    new SelectList(new[] { "Male", "Female", "Other" }, Model.Gender),
+                                "Select Gender", new { @class = "form-control", required = "required" })
+            </div>
+
+            <div class="form-group">
+                <label>Blood Group</label>
+                @Html.TextBoxFor(m => m.BloodGroup, new { @class = "form-control" })
+            </div>
+
+            <!-- CONTACT INFORMATION -->
+            <div class="form-group">
+                <label>Email<span style="color:red">*</span></label>
+                @Html.TextBoxFor(m => m.Email, new { type = "email", @class = "form-control", required = "required" })
+            </div>
+
+            <div class="form-group">
+                <label>Phone Number<span style="color:red">*</span></label>
+                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", required = "required" })
+            </div>
+
+            <div class="form-group">
+                <label>Alternate Phone</label>
+                @Html.TextBoxFor(m => m.AlternatePhone, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group" style="grid-column:1 / -1;">
+                <label>Address<span style="color:red">*</span></label>
+                @Html.TextBoxFor(m => m.Address, new { @class = "form-control", required = "required" })
+            </div>
+
+            <div class="form-group">
+                <label>City<span style="color:red">*</span></label>
+                @Html.TextBoxFor(m => m.City, new { @class = "form-control", required = "required" })
+            </div>
+
+            <div class="form-group">
+                <label>State<span style="color:red">*</span></label>
+                @Html.TextBoxFor(m => m.State, new { @class = "form-control", required = "required" })
+            </div>
+
+            <div class="form-group">
+                <label>Zip Code<span style="color:red">*</span></label>
+                @Html.TextBoxFor(m => m.ZipCode, new { @class = "form-control", required = "required" })
+            </div>
+
+            <!-- ACADEMIC INFO -->
+            <div class="form-group">
+                <label>Student ID<span style="color:red">*</span></label>
+                @Html.TextBoxFor(m => m.StudentId, new { @class = "form-control", required = "required" })
+            </div>
+
+            <div class="form-group">
+                <label>Enrollment Date<span style="color:red">*</span></label>
+                @Html.TextBoxFor(m => m.EnrollmentDate, "{0:yyyy-MM-dd}", new { type = "date", @class = "form-control", required = "required" })
+            </div>
+
+            <div class="form-group">
+                <label>Class/Grade<span style="color:red">*</span></label>
+                @Html.TextBoxFor(m => m.ClassId, new { type = "number", min = "1", @class = "form-control", required = "required" })
+            </div>
+
+            <div class="form-group">
+                <label>Section</label>
+                @Html.TextBoxFor(m => m.Section, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label>Roll Number</label>
+                @Html.TextBoxFor(m => m.RollNumber, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group" style="grid-column:1 / -1;">
+                <label>Previous School</label>
+                @Html.TextBoxFor(m => m.PreviousSchool, new { @class = "form-control" })
+            </div>
+
+            <!-- PARENT INFORMATION -->
+            <div class="form-group">
+                <label>Father's Name<span style="color:red">*</span></label>
+                @Html.TextBoxFor(m => m.FatherName, new { @class = "form-control", required = "required" })
+            </div>
+
+            <div class="form-group">
+                <label>Father Occupation</label>
+                @Html.TextBoxFor(m => m.FatherOccupation, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label>Father Phone<span style="color:red">*</span></label>
+                @Html.TextBoxFor(m => m.FatherPhone, new { @class = "form-control", required = "required" })
+            </div>
+
+            <div class="form-group">
+                <label>Mother's Name<span style="color:red">*</span></label>
+                @Html.TextBoxFor(m => m.MotherName, new { @class = "form-control", required = "required" })
+            </div>
+
+            <div class="form-group">
+                <label>Mother Occupation</label>
+                @Html.TextBoxFor(m => m.MotherOccupation, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label>Mother Phone</label>
+                @Html.TextBoxFor(m => m.MotherPhone, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label>Emergency Contact</label>
+                @Html.TextBoxFor(m => m.EmergencyContact, new { @class = "form-control" })
+            </div>
+
+            <!-- PROFILE PHOTO -->
+            <div class="form-group" style="grid-column:1 / -1;">
+                <label>Profile Photo</label>
+                <input type="file" name="ProfilePhoto" class="form-control" />
+
+                @if (!string.IsNullOrEmpty(Model.ProfilePhotoPath))
+                    {
+                        <div style="margin-top:10px;">
+                            <img src="@Model.ProfilePhotoPath" alt="Profile Photo"
+                                 style="width:120px;height:120px;border-radius:10px;object-fit:cover;" />
+                        </div>
+                    }
+                </div>
+
+            </div>
+
+            <div style="display:flex; gap:15px; justify-content:flex-end; margin-top:30px;">
+                <a href="@Url.Action("Index", "Student")" class="btn-cancel"
+                   style="padding: 12px 30px; background: #f0f0f0; border-radius:8px; text-decoration:none;">
+                    Cancel
+                </a>
+
+                <button type="submit" class="btn-primary">💾 Update Student</button>
+            </div>
+        }
+    </div>
+</div>
